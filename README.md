@@ -8,6 +8,4 @@ Very simple tool to sign in CC98 in ZJU
 python main.py
 ```
 
-and enter your CC98 username and password.
-
-I will test it tomorrow, and will update to github actions if it works.
+and enter your CC98 username and password if you are the first time to use.
