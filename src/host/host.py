@@ -1,6 +1,7 @@
 import os
 import json
 import requests
+import shutil
 
 
 def cc98_initialize():
@@ -10,11 +11,17 @@ def cc98_initialize():
     if not os.path.exists('config.json'):
         if os.path.exists('config.json.example'):
             print("I assumed you use this project for the first time. I will create a config file for you.")
-            os.rename('config.json.example', 'config.json')
+            shutil.copy('config.json.example', 'config.json')
         user_name = input("Enter your CC98 username: ")
         passwd = input("Enter your CC98 password: ")
+        with open('config.json', 'r') as f:
+            content = f.read()
+        config = json.loads(content)
+        config['CC98_USERNAME'] = user_name
+        config['CC98_PASSWORD'] = passwd
         with open('config.json', 'w') as f:
-            f.write(f'{"username": "{user_name}", "password": "{passwd}"}')
+            f.write(json.dumps(config))
+            
     else:
         with open('config.json', 'r') as f:
             content = f.read()
